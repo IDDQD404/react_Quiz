@@ -1,11 +1,15 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import Button from "./components/button/Button";
+import Quiz from "./components/quiz/Quiz";
 
 function App() {
   return (
     <div className="App">
-      <h1>A</h1>
+      {/* add redux */}
+      <Button text={"dfsdfd"} />
+      <Quiz />
     </div>
   );
 }
