@@ -9,7 +9,12 @@ function App() {
     <div className="App">
       {/* add redux */}
       <Button text={"dfsdfd"} />
-      <Quiz />
+      <Quiz
+        QuestionLabel={"1"}
+        QuestionBody={"1"}
+        VariantsAnswer={["1", "2"]}
+        CompletedQuestions={[true]}
+      />
     </div>
   );
 }

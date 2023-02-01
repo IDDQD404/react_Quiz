@@ -3,20 +3,39 @@ import Button from "../button/Button";
 import Frame from "../frame/Frame";
 import IsChecked from "../ischecked/IsChecked";
 
-export default function Quiz() {
+type QuizElements = {
+  QuestionLabel: string;
+  QuestionBody: string;
+  VariantsAnswer: string[];
+  CompletedQuestions: boolean[];
+};
+
+export default function Quiz(args: QuizElements) {
   return (
     <div className="Quiz">
       <Frame
         inner_elements={[
           <>
-            <p className="Text-top">Question 1</p>
+            <p className="Text-top">{args.QuestionLabel}</p>
             <hr />
-            <p className="Text-question">Question body</p>
-            <Button text={"Variant 1"} />
-            <Button text={"Variant 2"} />
+            <p className="Text-question">{args.QuestionBody}</p>
+
+            {args.VariantsAnswer &&
+              args.VariantsAnswer.map((Variant) => <Button text={Variant} />)}
+
             <br />
-            <Button text={"Next"} />
-            <IsChecked isFailed={false} /> <IsChecked isFailed={true} />
+            <br />
+            <div style={{ width: "10%", margin: "10px" }}>
+              <Button text={"Next"} />
+            </div>
+
+            {args.CompletedQuestions && (
+              <div className="CompletedStatus">
+                {args.CompletedQuestions.map((CompeletStatus) => (
+                  <IsChecked isFailed={CompeletStatus} />
+                ))}
+              </div>
+            )}
           </>,
         ]}
       />
