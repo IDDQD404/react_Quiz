@@ -7,7 +7,7 @@ type QuizElements = {
   QuestionLabel: string;
   QuestionBody: string;
   VariantsAnswer: string[];
-  CompletedQuestions: boolean[];
+  FailedQuestions: boolean[];
 };
 
 export default function Quiz(args: QuizElements) {
@@ -29,10 +29,10 @@ export default function Quiz(args: QuizElements) {
               <Button text={"Next"} />
             </div>
 
-            {args.CompletedQuestions && (
+            {args.FailedQuestions && (
               <div className="CompletedStatus">
-                {args.CompletedQuestions.map((CompeletStatus) => (
-                  <IsChecked isFailed={CompeletStatus} />
+                {args.FailedQuestions.map((FailedStatus) => (
+                  <IsChecked isFailed={FailedStatus} />
                 ))}
               </div>
             )}

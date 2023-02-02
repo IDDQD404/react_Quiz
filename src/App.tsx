@@ -1,19 +1,50 @@
-import React from "react";
-import logo from "./logo.svg";
+import React, { useState } from "react";
 import "./App.css";
-import Button from "./components/button/Button";
 import Quiz from "./components/quiz/Quiz";
 
+import { useAppSelector, useAppDispatch } from "./hooks";
+import {
+  incrementQuestionNumber,
+  decrementQuestionNumber,
+  AppCounter,
+} from "./AppSlice";
+
 function App() {
+  const variable = useAppSelector(AppCounter);
+  const dispatch = useAppDispatch();
+
+  const Questions = {
+    QuestionLabel: `Question ${variable.QuestionNumber.value} of 3`,
+    QuestionBody: variable.QuestionBody.value,
+    VariantsAnswers: variable.VariantsAnswers.value,
+  };
+
   return (
     <div className="App">
       {/* add redux */}
-      <Button text={"dfsdfd"} />
+      <div>
+        <div>
+          <button
+            aria-label="Decrement value"
+            onClick={() => dispatch(decrementQuestionNumber())}
+          >
+            -
+          </button>
+          <span>{variable.QuestionNumber.value}</span>
+          <button
+            aria-label="Increment value"
+            onClick={() => dispatch(incrementQuestionNumber())}
+          >
+            +
+          </button>
+        </div>
+      </div>
+      {/* <Button text={"dfsdfd"} /> */}
       <Quiz
-        QuestionLabel={"1"}
-        QuestionBody={"1"}
-        VariantsAnswer={["1", "2"]}
-        CompletedQuestions={[true]}
+        QuestionLabel={Questions.QuestionLabel}
+        QuestionBody={Questions.QuestionBody}
+        VariantsAnswer={Questions.VariantsAnswers}
+        FailedQuestions={[true, false]}
       />
     </div>
   );
