@@ -1,13 +1,14 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState, AppThunk } from "./store";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "./store";
 
 const initialState = {
-  QuestionNumber: { value: 1 },
-  QuestionBody: { value: "How to write an IF statemente in JS?" },
+  QuestionNumber: { value: 0 },
+  QuestionBody: { value: "" },
   VariantsAnswers: {
-    value: ["if i == 5 then", "if(i==5)", "if i = 5", "if i = 5 then"],
+    value: [""],
   },
-  FailedQuestions: { value: [true, false] },
+  FailedQuestions: { value: <boolean[]>[] },
+  RightAnswer: { value: "" },
 };
 
 export const AppSlice = createSlice({
@@ -22,13 +23,34 @@ export const AppSlice = createSlice({
       state.QuestionNumber.value -= 1;
     },
 
+    setQuestionBody(state, action: PayloadAction<string>) {
+      state.QuestionBody.value = action.payload;
+    },
+
+    setVariantsAnswers(state, action: PayloadAction<string[]>) {
+      state.VariantsAnswers.value = action.payload;
+    },
+
+    addFailedQuestions(state, action: PayloadAction<boolean>) {
+      state.FailedQuestions.value.push(action.payload);
+    },
+
+    setRightAnswer(state, action: PayloadAction<string>) {
+      state.RightAnswer.value = action.payload;
+    },
     // incrementByAmount: (state, action: PayloadAction<number>) => {
     //   state.value += action.payload;
     // },
   },
 });
 
-export const { incrementQuestionNumber, decrementQuestionNumber } =
-  AppSlice.actions;
+export const {
+  incrementQuestionNumber,
+  decrementQuestionNumber,
+  setQuestionBody,
+  setVariantsAnswers,
+  addFailedQuestions,
+  setRightAnswer,
+} = AppSlice.actions;
 export const AppCounter = (state: RootState) => state.quiz_stats;
 export default AppSlice.reducer;

@@ -2,7 +2,7 @@ import React from "react";
 import "./Frame.css";
 
 type FrameDetails = {
-  inner_elements: any;
+  inner_elements: any[];
 };
 export default function Frame(agrs: FrameDetails) {
   return (
