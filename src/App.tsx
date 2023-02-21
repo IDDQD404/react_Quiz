@@ -21,7 +21,6 @@ function App() {
   const [setFailedQstns, FailedQstns] = useState([]);
 
   useEffect(() => {
-    // alert(`${variables.QuestionNumber.value}  ${Questions.length}`);
     dispatch(
       setQuestionBody(Questions[variables.QuestionNumber.value].QuestionBody)
     );
